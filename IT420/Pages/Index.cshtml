@@ -1,0 +1,79 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<h3>Latest Blogs</h3>
+
+<div class="card-columns">    
+        @foreach (var blog in Model.Blogs)
+        {
+            var user = Model.userProfiles.First(t => t.Id == blog.userId);
+            string imageBase64Data = Convert.ToBase64String(user.userImg);
+            string userImgURL = string.Format("data:image/jpg;base64, {0}", imageBase64Data);
+            var len = 196;
+            if (blog.body.Length < 196)
+            {
+                len = blog.body.Length;
+            }
+
+            <a class="text-black-50" asp-page="./Blogs/Detail" asp-route-blogId="@blog.blogId">
+                <div class="card">
+                    <img class="card-img-top" src="~/images/BlogImages/@blog.blogImageURL" />
+                    <div class="card-body">
+                        <div class="row">
+                            <img src="@userImgURL" width="55" height="55" />
+                            <div class="d-flex flex-column">
+                                <div class="m-1">
+                                    by: @user.firstName @user.lastName
+                                    <br />
+                                    @blog.CreatedDate.ToShortDateString()
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5>@blog.name</h5>
+
+                        <p>
+                            @blog.body.Substring(0, @len)...
+                        </p>
+                    </div>
+                </div>
+            </a>
+        }    
+</div>
+<!--
+@if (User.Identity.IsAuthenticated)
+{/*
+<table>
+    @foreach (var claim in User.Claims)
+    {
+        <tr>
+            <td>
+                @claim.Type 
+            </td>
+            <td>
+                @claim.Value
+            </td>
+        </tr>
+    }
+</table>
+*/}
+-->
+
+@section Scripts{
+    <script type="text/javascript">
+        setTimeout(function () { $('.alert-info').fadeOut(); }, 5000);
+    </script>
+
+}

@@ -1,0 +1,21 @@
+﻿@page
+@model IT420.Pages.Admin.AddTalkTypeModel
+@{
+}
+
+<h2>Add New Talk Type</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="@Model.Type.TypeId" />
+    <div class="form-group">
+        <label asp-for="@Model.Type.Type"></label>
+        <input asp-for="@Model.Type.Type" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.Type.Type"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-primary" asp-page="./Admin">Cancel</a>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

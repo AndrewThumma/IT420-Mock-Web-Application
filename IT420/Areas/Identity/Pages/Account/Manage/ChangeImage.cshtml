@@ -1,0 +1,45 @@
+﻿@page
+@model ChangeImageModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.ChangeImage;
+}
+
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+@{ 
+    string imageBase64Data = Convert.ToBase64String(Model.userProfile.userImg);
+    string userImgURL = string.Format("data:image/jpg;base64, {0}", imageBase64Data);
+}
+
+<div>
+    Current User Image: <img src="@userImgURL" width="55" height="55" />
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <form enctype="multipart/form-data" method="post">
+            <div class="form-group">
+                <div class="custom-file">
+                    <input asp-for="Input.userImage" class="form-control custom-file-input" />
+                    <label class="custom-file-label">Choose File...</label>
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+            @section scripts{
+                <script>
+                    $(document).ready(function () {
+                        $('.custom-file-input').on("change", function () {
+                            var fileName = $(this).val().split("\\").pop();
+                            $(this).next('.custom-file-label').html(fileName);
+                        });
+                    });
+                </script>
+            }
+        </form>
+    </div>
+</div>
+
+
+

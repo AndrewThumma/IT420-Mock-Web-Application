@@ -1,0 +1,10 @@
+﻿@page "{userId}"
+@model IT420.Areas.Identity.Pages.Account.MakeAdminModel
+@{
+}
+
+<div class="text-danger">Are you sure you wish to promote @Model.userProfile.UserName to Admin?</div>
+<form method="post">
+    <button type="submit" class="btn btn-danger">Promote</button>
+    <a class="btn btn-primary" asp-page="./ListUsers">Cancel</a>
+</form>

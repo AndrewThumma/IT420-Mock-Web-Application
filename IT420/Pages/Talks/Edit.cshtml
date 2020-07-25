@@ -1,0 +1,27 @@
+﻿@page "{SelectedTalkId:int}"
+@model IT420.Pages.Talks.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+    <form method="post">
+        <input type="hidden" asp-for="Talk.TalkId" />
+        <input type="hidden" asp-for="Talk.TypeId" />
+        <input type="hidden" asp-for="Talk.userId" />
+        <div class="form-group">
+            <label asp-for="Talk.Name"></label>
+            <input asp-for="Talk.Name" class="form-control" />
+            <span class="text-danger" asp-validation-for="Talk.Name"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Talk.Body"></label>
+            <input asp-for="Talk.Body" class="form-control" />
+            <span class="text-danger" asp-validation-for="Talk.Body"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-primary" asp-page="./Detail" asp-route-SelectedTalkId="@Model.Talk.TalkId">Cancel</a>
+    </form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

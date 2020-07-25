@@ -1,0 +1,35 @@
+﻿@page
+
+@model IT420.Pages.Talks.AddTalkModel
+@{
+    ViewData["Title"] = "AddTalk";
+}
+
+<h1>AddTalk</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="@Model.Talk.TalkId" />
+    <input type="hidden" asp-for="@Model.Talk.userId" />
+    <input type="hidden" asp-for="@Model.Talk.CreatedDate" />
+    <div class="form-group">
+        <label asp-for="@Model.Talk.TypeId"></label>
+        <select asp-for="@Model.Talk.TypeId" asp-items="@Model.typeList" class="form-control"></select>
+        <span class="text-danger" asp-validation-for="@Model.Talk.TypeId"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Talk.Name"></label>
+        <input asp-for="@Model.Talk.Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.Talk.Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Talk.Body"></label>
+        <input asp-for="@Model.Talk.Body" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.Talk.Body"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+    <a class="btn btn-primary" asp-page="../Index">Cancel</a>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

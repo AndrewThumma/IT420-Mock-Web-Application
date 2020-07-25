@@ -1,0 +1,44 @@
+﻿@page "{answerId:int}"
+@model IT420.Pages.Experts.UpdateAnswerModel
+@{
+}
+
+<h2>Update Answer</h2>
+<br />
+<div class="card card-body">
+    <div class="row">
+        <h3>@Model.Answer.Question.question</h3>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            <!--User Image-->
+        </div>
+        <div class="col-11">
+            <div>
+                Created by: <!--User Name-->
+            </div>
+            <div>
+                Updated on: @Model.Answer.Question.CreatedDate
+            </div>
+        </div>
+    </div>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="@Model.Answer.questionId" />
+    <input type="hidden" asp-for="@Model.Answer.expertId"/>
+    <input type="hidden" asp-for="@Model.Answer.id" />
+    <div class="form-group">
+        <label asp-for="@Model.Answer.answer"></label>
+        <textarea asp-for="@Model.Answer.answer" class="form-control"></textarea>
+        <span class="text-danger" asp-validation-for="@Model.Answer.answer"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-primary" asp-page="./QuestionDetail" asp-route-questionId="@Model.Answer.Question.id">Cancel</a>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+

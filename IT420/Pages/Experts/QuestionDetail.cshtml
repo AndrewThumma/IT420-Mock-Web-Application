@@ -1,0 +1,84 @@
+﻿@page "{questionId:int}"
+@model IT420.Pages.Experts.QuestionDetailModel
+@{
+}
+
+<a asp-page="./QuestionList" asp-route-questionTypeId="@Model.Question.typeId">Return to list</a>
+
+@{
+    string imageBase64Data = Convert.ToBase64String(Model.userProfile.userImg);
+    string userImgURL = string.Format("data:image/jpg;base64, {0}", imageBase64Data);
+}
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2>@Model.Question.question</h2>
+        <div class="row">
+            <div class="col-1">
+                @if (userImgURL.Contains("AA=="))
+                {
+                    <img src="~/images/UserImages/new.jpg" width="55" height="55" />
+                }
+                else
+                {
+                    <img src="@userImgURL" width="55" height="55" />
+                }
+            </div>
+            <div class="col-10">
+                <div>
+                    Created by: @Model.userProfile.firstName @Model.userProfile.lastName
+                </div>
+                <div>
+                    Updated on: @Model.Question.CreatedDate
+                </div>
+            </div>
+            <div class="col-1">
+                @if (User.Identity.Name == Model.userProfile.UserName || User.Claims.First(c=> c.Type == "IsAdmin").Value.Equals("True"))
+                {
+                    <a class="fas fa-trash" asp-page="./DeleteQuestion" asp-route-questionId="@Model.Question.id"></a>
+                }
+            </div>
+        </div>
+        <div>@Model.Question.Type.type</div>
+    </div>
+    <div class="card-body">
+        @if (User.Claims.First(c => c.Type == "IsExpert").Value.Equals("True") && Model.Question.answered == false)
+        {
+            <a class="btn btn-secondary" asp-page="./AnswerQuestion" asp-route-questionId="@Model.Question.id">Add Answer</a>
+        }
+
+        @if (Model.Question.answered == true && Model.Question.Answer.Expert.userId == Model.userId)
+        {
+            <a class="btn btn-secondary" asp-page="./UpdateAnswer" asp-route-answerId="@Model.Question.Answer.id">Udpate Answer</a>
+        }
+
+        <div>Answer:</div>
+        @if (Model.Question.answered == true)
+        {
+
+            <div>@Model.Question.Answer.answer</div>
+        }
+        else
+        {
+            <div>No Answer Yet</div>
+        }
+    </div>
+</div>
+
+<a asp-page="./QuestionList" asp-route-questionTypeId="@Model.Question.typeId">Return to list</a>
+
+@section Scripts{
+    <script type="text/javascript">
+        setTimeout(function () { $('.alert-info').fadeOut(); }, 5000);
+    </script>
+}
+
+
+
+
+

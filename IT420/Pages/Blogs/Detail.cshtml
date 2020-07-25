@@ -1,0 +1,42 @@
+﻿@page "{blogId:int}"
+@model IT420.Pages.Blogs.DetailModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+
+<a class="btn btn-primary m-1" asp-page="./List">Return to Blog List</a>
+
+@if (User.Identity.IsAuthenticated && User.Claims.First(c=>c.Type == "IsAdmin").Value.Equals("True"))
+{
+<div class="alert alert-danger m-1">
+    <a class="btn btn-danger" asp-page="./DeleteBlog" asp-route-blogId="@Model.Blog.blogId">Delete Blog</a>
+</div>
+}
+
+
+<div class="card m-1">
+    <div class="card-header card-img-top">
+        <div class="card-img-top">
+            <img src="~/images/BlogImages/@Model.Blog.blogImageURL" />
+        </div>
+        <div class="card-title">
+            <h2>@Model.Blog.name</h2>
+        </div>
+        <div class="card-text">
+            by: @Model.userProfile.firstName @Model.userProfile.lastName
+        </div>
+        <div class="card-text">
+            Created: @Model.Blog.CreatedDate
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="card-text">
+            @Model.Blog.body
+        </div>
+        
+    </div>
+</div>
+
+<a class="btn btn-primary m-1" asp-page="./List">Return to Blog List</a>

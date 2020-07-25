@@ -1,0 +1,130 @@
+﻿@page
+@model IT420.Pages.Admin.AdminModel
+@{
+}
+ 
+
+<div class="card-deck m-5">
+        <!--Talks-->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    Talks
+                </h5>
+            </div>
+            
+            <div class="card-body">                
+                <p class="card-text">
+                    <a asp-page="./AddTalkType">Add Talk Type</a>
+                </p>
+            </div>            
+        </div>
+
+        <!--Blogs-->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    Blogs
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <div class="card-text">
+                    <a asp-page="./AddBlogType">Add Blog Type</a>
+                </div>
+                <div class="card-text">
+                    <a asp-page="./ReviewBlogs">Review Pending Blogs</a>
+                </div>
+            </div>
+        </div>
+
+        <!--Experts-->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    Experts
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <div class="card-text">
+                    <a asp-page="AddQuestionType">Add Question Type</a>
+                </div>
+                <div class=" card-text">
+                    <a asp-page="../Experts/ManageExperts">Manage Experts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-deck m-5">
+        <!--Services-->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    Services
+                </h5>
+            </div>
+            <div class="card-body col">
+
+            </div>
+        </div>
+        <!--Videos-->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    Videos
+                </h5>
+            </div>
+            <div class="card-body col">
+
+            </div>
+        </div>
+        <!--Schedule Live Chats-->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    Scheduled Live Chats
+                </h5>
+            </div>
+            <div class="card-body col">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card-deck m-5">
+        <!--Users-->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    Users
+                </h5>
+            </div>
+            <div class="card-body col">
+                <a asp-area="Identity" asp-page="/Account/ListUsers">Manage Users</a>                
+            </div>
+        </div>
+        <!---->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    
+                </h5>
+            </div>
+            <div class="card-body col">
+
+            </div>
+        </div>
+        <!---->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    
+                </h5>
+            </div>
+            <div class="card-body col">
+
+            </div>
+        </div>
+    </div>

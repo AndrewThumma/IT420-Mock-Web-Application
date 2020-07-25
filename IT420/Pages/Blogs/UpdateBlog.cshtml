@@ -1,0 +1,29 @@
+﻿@page "{blogId:int}"
+@model IT420.Pages.Blogs.UpdateBlogModel
+@{
+    ViewData["Title"] = "UpdateBlog";
+}
+
+<h1>Update Blog</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="@Model.Blog.blogId" />
+    <div class="form-group">
+        <label asp-for="@Model.Blog.blogTypeId"></label>
+        <input asp-for="@Model.Blog.blogTypeId" />
+        <span class="text-danger" asp-validation-for="@Model.Blog.blogTypeId"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Blog.name"></label>
+        <input asp-for="@Model.Blog.name" />
+        <span class="text-danger" asp-validation-for="@Model.Blog.name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Blog.body"></label>
+        <input asp-for="@Model.Blog.body" />
+        <span class="text-danger" asp-validation-for="@Model.Blog.body"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-primary" asp-page="./Detail" asp-route-blogId="@Model.Blog.blogId">Cancel</a>
+</form>
+

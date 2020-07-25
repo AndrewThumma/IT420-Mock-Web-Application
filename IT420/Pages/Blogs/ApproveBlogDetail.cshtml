@@ -1,0 +1,22 @@
+﻿@page "{blogId:int}"
+@model IT420.Pages.Blogs.ApproveBlogDetailModel
+@{
+}
+
+<h2>Title: @Model.blog.name</h2>
+<h3>Blog Created: @Model.blog.CreatedDate</h3>
+<!--
+    Enter user Information here
+<h3>@Model.blog.userId</h3>
+-->
+<div class="text-body">@Model.blog.body</div>
+<form method="post">
+    <input type="hidden" asp-for="blog.blogId" />
+    <input type="hidden" asp-for="blog.name" />
+    <input type="hidden" asp-for="blog.type" />
+    <input type="hidden" asp-for="blog.blogTypeId" />
+    <input type="hidden" asp-for="blog.userId" />
+    <input type="hidden" asp-for="blog.body" />
+    <button type="submit" class="btn btn-primary">Approve</button>
+    <a class="btn btn-primary" asp-page="./approvebloglist">Cancel</a>
+</form>

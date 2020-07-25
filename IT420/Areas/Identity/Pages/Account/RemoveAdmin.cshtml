@@ -1,0 +1,10 @@
+﻿@page "{userId}"
+@model IT420.Areas.Identity.Pages.Account.RemoveAdminModel
+@{
+}
+
+<div class="text-danger">Are you sure you wish to demote @Model.userProfile.UserName from Admin?</div>
+<form method="post">
+    <button type="submit" class="btn btn-danger">Demote</button>
+    <a class="btn btn-primary" asp-page="./ListUsers">Cancel</a>
+</form>

@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parentune</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <script type="application/javascript">
+        window.tiledeskSettings =
+          {
+          projectid: "5eb94ecede65f500175d2222"
+          };
+          (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id; //js.async=!0;
+            js.src = "https://widget.tiledesk.com/v3/launch.js";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'tiledesk-jssdk'));
+    </script>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img src="~/images/parentune_new_logo.png" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-lg-inline-flex flex-lg-row-reverse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fas fa-home" asp-area="" asp-page="/Index"></a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown show">
+                                <a class="nav-link text-dark dropdown-toggle" id="talkdropdown" asp-area="" asp-page="/Talk" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Talks</a>
+                                <div class="dropdown-menu" aria-labelledby="talkdropdown">
+                                    <a class="dropdown-item" asp-page="/Talks/list" asp-route-SelectedTypeId="1">Parenting</a>
+                                    <a class="dropdown-item" asp-page="/Talks/list" asp-route-SelectedTypeId="2">Career</a>
+                                    <a class="dropdown-item" asp-page="/Talks/list" asp-route-SelectedTypeId="3">Babycare</a>
+                                    <a class="dropdown-item" asp-page="/Talks/list" asp-route-SelectedTypeId="4">Food and Nutrition</a>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <a class="dropdown-item" asp-page="/Talks/AddTalk">Add Talk</a>
+                                    }
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown show">
+                                <a class="nav-link text-dark dropdown-toggle" id="blogdropdown" asp-area="" asp-page="/Blog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blogs</a>
+                                <div class="dropdown-menu" aria-labelledby="blogdropdown">
+                                    <a class="dropdown-item" asp-page="/Blogs/WriteBlog">Write a Blog</a>
+                                    <a class="dropdown-item" asp-page="/Blogs/List" asp-route-blogTypeId="1">Breastfeeding</a>
+                                    <a class="dropdown-item" asp-page="/Blogs/List" asp-route-blogTypeId="2">Education & Learning</a>
+                                    <a class="dropdown-item" asp-page="/Blogs/List" asp-route-blogTypeId="3">Hobbies</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown show">
+                                <a class="nav-link text-dark dropdown-toggle" id="expertdropdown" asp-area="" asp-page="/Expert" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ask Expert</a>
+                                <div class="dropdown-menu" aria-labelledby="expertdropdown">
+                                    <a class="dropdown-item" asp-page="/Experts/ExpertList">Expert Panel</a>
+                                    <a class="dropdown-item" asp-page="/Experts/QuestionList" asp-route-questionTypeId="1">Health Corner</a>
+                                    <a class="dropdown-item" asp-page="/Experts/QuestionList" asp-route-questionTypeId="2">Nutrition Corner</a>
+                                    <!--<a class="dropdown-item" asp-page="/Experts/Join">Join Expert Panel</a>-->
+                                </div>
+                            </div>
+                        </li>
+                        <!--                            
+                        Videos to be added later
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Videos">Videos</a>
+                        </li>
+                        -->
+                        <!--                            
+                        Scheduled Live Chat to be added later
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/LiveChat">Live Chat</a>
+                        </li>
+                        -->
+                        <!--
+                        Additional services to be added later                        
+                        <li class="nav-item">
+                            <div class="dropdown show">
+                                <a class="nav-link text-dark dropdown-toggle" id="servicesdropdown" asp-area="" asp-page="/Services" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
+                                <div class="dropdown-menu" aria-labelledby="servicesdropdown">
+                                    <a class="dropdown-item" asp-page="/Services/Color">Coloring Pages</a>
+                                    <a class="dropdown-item" asp-page="/Services/Names">Baby Names</a>
+                                    <a class="dropdown-item" asp-page="/Services/Ovulation">Ovulation Calculator</a>
+                                    <a class="dropdown-item" asp-page="/Services/DueDate">Due Date Calculator</a>
+                                </div>
+                            </div>
+                        </li>
+                        -->
+                        
+                        @if (User.Identity.IsAuthenticated && User.Claims.First(c => c.Type == "IsAdmin").Value.Equals("True")) 
+                            {
+                                <li>
+                                    <a class="nav-link text-dark"  asp-area="" asp-page="/Admin/Admin">Administer Site</a>
+                                </li>
+                            }
+
+                        <li>
+                            <partial name="_LoginPartial.cshtml" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - IT420 - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

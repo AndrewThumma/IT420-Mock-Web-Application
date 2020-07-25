@@ -1,0 +1,74 @@
+﻿@page "{blogTypeId:int}"
+@model IT420.Pages.Blogs.ListModel
+@{
+    ViewData["Title"] = "List";
+}
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+
+
+<h1>@Model.blogType Blogs</h1>
+
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control" asp-for="searchTerm" />
+            <div class="input-group-append">
+                <button class="btn btn-secondary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@foreach (var blog in @Model.blogs)
+{
+    int len = 200;
+    var user = Model.userProfiles.FirstOrDefault(u => u.Id == blog.userId);
+    if (blog.body.Length < 200)
+    {
+        len = blog.body.Length;
+    }
+
+    <div class="card">
+        
+        <div class="card-header">
+            <div class="card-title">
+                <h2><a asp-page="./Detail" asp-route-blogId="@blog.blogId">@blog.name</a></h2>
+            </div>
+            <div class="card-text">
+                by: @user.firstName @user.lastName
+            </div>
+            <div class="card-text">
+                @blog.CreatedDate
+            </div>
+                          
+        </div>
+        
+        
+        <!--code for image and date-->
+        <div class="card-body">
+            <div class="card-text">
+                <!--Blog Name-->
+                
+            </div>
+            <div class="card-text">
+                <!--preview of body-->
+                @blog.body.Substring(Model.start, len)...
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        setTimeout(function () { $('.alert-info').fadeOut(); }, 5000);
+    </script>
+
+}
+

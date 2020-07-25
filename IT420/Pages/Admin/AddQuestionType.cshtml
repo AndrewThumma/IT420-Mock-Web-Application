@@ -1,0 +1,21 @@
+﻿@page
+@model IT420.Pages.Admin.AddQuestionTypeModel
+@{
+}
+
+<h2>Add Question Type</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="@Model.Type.id" />
+    <div class="form-group">
+        <label asp-for="@Model.Type.type"></label>
+        <input asp-for="@Model.Type.type" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.Type.type"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-primary" asp-page="./Admin">Cancel</a>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

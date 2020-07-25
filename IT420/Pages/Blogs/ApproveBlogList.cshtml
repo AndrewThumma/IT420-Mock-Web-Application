@@ -1,0 +1,46 @@
+﻿@page
+@model IT420.Pages.Blogs.ApproveBlogListModel
+@{
+}
+
+<h1>Blogs Awaiting Approval</h1>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+@if (Model.blogs.Count() == 0)
+{
+    <span>No Blogs awaiting approval!</span>
+}
+
+@foreach (var blog in Model.blogs)
+{
+    <div class="card m-1">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-11">
+                    @blog.name
+                </div>
+                <div class="col-1">
+                    <a class="fas fa-search-plus" asp-route-blogId="@blog.blogId" asp-page="./ApproveBlogDetail"></a>
+                    <a class="fas fa-trash" asp-page="./DeleteBlog" asp-route-blogId="@blog.blogId"></a>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div class="card-text">
+                Type: @blog.type.type
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        setTimeout(function () { $('.alert-info').fadeOut(); }, 5000);
+    </script>
+
+}

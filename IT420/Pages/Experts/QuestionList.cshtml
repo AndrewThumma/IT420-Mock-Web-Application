@@ -1,0 +1,149 @@
+﻿@page "{questionTypeId:int}"
+@model IT420.Pages.Experts.QuestionListModel
+@{
+}
+
+    <style>
+        .addReadMore.showlesscontent .SecSec,
+        .addReadMore.showlesscontent .readLess {
+            display: none;
+        }
+
+        .addReadMore.showmorecontent .readMore {
+            display: none;
+        }
+
+        .addReadMore .readMore,
+        .addReadMore .readLess {            
+            margin-left: 2px;
+            color: blue;
+            cursor: pointer;
+        }
+
+        .addReadMoreWrapTxt.showmorecontent .SecSec,
+        .addReadMoreWrapTxt.showmorecontent .readLess {
+            display: block;
+        }
+    </style>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<h2>@Model.type.type</h2>
+
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control" asp-for="searchTerm" />
+            <div class="input-group-append">
+                <button class="btn btn-secondary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<a class="btn btn-primary" asp-page="./AskQuestion" asp-route-questionTypeId="@Model.type.id">Ask Question</a>
+<p class="addReadMore showlesscontent">
+
+    Parentune understands that parenting cannot always be hear-say. Often, parents need expert advice and solution for their unique pregnancy and parenting problems. But a doctor may not always be accessible. Or parents may need a second opinion on something a doctor might have suggested.  Keeping this in view, parentune has on its panel a list of medical professionals and parenting experts who are happy to answer the queries of parents. Parents can ask a question directly in the expert section and experts give detailed answers to these questions that can relate to health, education and nutrition.
+
+    What Kind Of Questions Can I Ask In The Ask Expert Section?
+    We have seen parents getting their many concerns resolved by asking the experts. These concerns have ranged from pregnancy diet, week by week pregnancy charts, baby food in first six months, health tips for losing weight post pregnancy, how to stop breastfeeding, how to increase child's immunity, to list of vaccines and baby massage oils. Experts ensure that they reply to parents in few hours. Each of the experts is accomplished in their areas. Hence, parents benefit significantly from this service of parentune. They can learn more about our panelists by clicking on Expert Panel.
+
+    Can I Ask Questions In Languages Other Than English?
+    At parentune, we understand our cultural diversities and so we have multilingual experts on our panel to answer your question in the language you are comfortable with. What is really helpful is that multilingual experts understand the needs of the parents well and are available to answer the question in Hindi as well. We are slowly adding support for more languages.
+
+    Is My Privacy Protected In Parentune?
+    Your privacy is of utmost importance to us, and we give you the option of allowing your question be visible to everyone to only fellow parents - the set of parents that you have connected on parentune. Further, it is important to mark an age group while asking question. This helps us to find the most relevant expert to answer your question.
+
+    Get Personalised Parenting Experience With The Parentune App
+    All this content is available on our website, mobile site and app as well. As you know, parents are best supported on the parentune app, hence it is useful to ask question on the app. That will allow you to receive notification as soon as an expert has answered the question. We are your must have parenting guide, available to you at just a click.
+
+</p>
+
+
+@foreach (var question in Model.questions)
+{
+    var questionUser = Model.userProfiles.First(u => u.Id == question.userId);
+
+    string imageBase64Data = Convert.ToBase64String(questionUser.userImg);
+    string userImgURL = string.Format("data:image/jpg;base64, {0}", imageBase64Data);
+
+    <div class="card m-1">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-1">
+                    @if (userImgURL.Contains("AA=="))
+                    {
+                        <img src="~/images/UserImages/new.jpg" width="55" height="55" />
+                    }
+                    else
+                    {
+                        <img src="@userImgURL" width="55" height="55" />
+                    }
+                </div>
+                <div class="col-10">
+                    <div>
+                        <a asp-page="./QuestionDetail" asp-route-questionId="@question.id">@question.question</a>
+                    </div>
+                    <div>
+                        @question.CreatedDate | @question.Type.type
+                    </div>
+                </div>
+                <div class="col-1">
+                    @if (question.answered == true)
+                    {
+                        <a class="fas fa-check"></a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        setTimeout(function () { $('.alert-info').fadeOut(); }, 5000);
+    </script>
+    <script type="text/javascript">
+        function AddReadMore() {
+            //This limit you can set after how much characters you want to show Read More.
+            var carLmt = 300;
+            // Text to show when text is collapsed
+            var readMoreTxt = " ... Read More";
+            // Text to show when text is expanded
+            var readLessTxt = " Read Less";
+
+
+            //Traverse all selectors with this class and manupulate HTML part to show Read More
+            $(".addReadMore").each(function () {
+                if ($(this).find(".firstSec").length)
+                    return;
+
+                var allstr = $(this).text();
+                if (allstr.length > carLmt) {
+                    var firstSet = allstr.substring(0, carLmt);
+                    var secdHalf = allstr.substring(carLmt, allstr.length);
+                    var strtoadd = firstSet + "<span class='SecSec'>" + secdHalf + "</span><span class='readMore'  title='Click to Show More'>" + readMoreTxt + "</span><span class='readLess' title='Click to Show Less'>" + readLessTxt + "</span>";
+                    $(this).html(strtoadd);
+                }
+
+            });
+            //Read More and Read Less Click Event binding
+            $(document).on("click", ".readMore,.readLess", function () {
+                $(this).closest(".addReadMore").toggleClass("showlesscontent showmorecontent");
+            });
+        }
+        $(function () {
+            //Calling function after Page Load
+            AddReadMore();
+        });
+    </script>
+
+    
+}
+
