@@ -1,0 +1,13 @@
+﻿@page "{SelectedCommentId:int}"
+@model IT420.Pages.Talks.DeleteCommentModel
+@{
+    ViewData["Title"] = "DeleteComment";
+}
+
+<div class="text-danger">
+    Are you sure you want to delete your comment?
+</div>
+<form method="post">
+    <button class="btn btn-danger" type="submit">Delete</button>
+    <a class="btn btn-primary" asp-page="./Detail" >Cancel</a>
+</form>

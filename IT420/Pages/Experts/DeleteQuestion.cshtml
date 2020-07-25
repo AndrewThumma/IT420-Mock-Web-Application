@@ -1,0 +1,10 @@
+﻿@page "{questionId:int}"
+@model IT420.Pages.Experts.DeleteQuestionModel
+@{
+}
+
+<div class="text-danger">Are you sure you sure you wish to delete your question?</div>
+<form method="post">
+    <button type="submit" class="btn btn-danger">Delete!</button>
+    <a class="btn btn-primary" asp-page="./QuestionDetail" asp-route-questionId="@Model.Question.id">Cancel</a>
+</form>

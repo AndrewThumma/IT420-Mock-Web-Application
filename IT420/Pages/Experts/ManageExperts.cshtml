@@ -1,0 +1,46 @@
+﻿@page
+@model IT420.Pages.Experts.ManageExpertsModel
+@{
+}
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">
+        @Model.Message
+    </div>
+}
+
+<h2>Manage Experts</h2>
+
+<a class="btn btn-primary" asp-page="../Admin/Admin">Return to Admin Page</a>
+
+@foreach (var expert in Model.Experts)
+{
+    <div class="card m-2">
+        <div class="card-header">
+            <h5 class="card-title">
+                @expert.firstName @expert.lastName
+            </h5>
+            @expert.specialty
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+                @expert.bio
+            </p>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-between">
+                <a asp-page="./UpdateExpert" asp-route-expertId="@expert.id" class="fas fa-edit"></a>
+                <a asp-page="./DeleteExpert" asp-route-expertId="@expert.id" class="fas fa-trash"></a>
+            </div>
+        </div>
+    </div>
+}
+
+<a class="btn btn-primary" asp-page="../Admin/Admin">Return to Admin Page</a>
+
+@section Scripts{
+    <script type="text/javascript">
+        setTimeout(function () { $('.alert-info').fadeOut(); }, 5000);
+    </script>
+}

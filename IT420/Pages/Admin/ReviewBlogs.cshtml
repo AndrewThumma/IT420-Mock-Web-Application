@@ -1,0 +1,51 @@
+﻿@page
+@model IT420.Pages.Admin.ReviewBlogsModel
+@{
+}
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">
+        @Model.Message
+    </div>
+}
+
+<h2>Blogs awaiting approval</h2>
+
+@if (Model.Blogs.Count() == 0)
+{
+    <div>No Blogs awaiting approval!</div>
+}
+else
+{
+    <a class="btn btn-primary" asp-page="./Admin">Return to Admin Page</a>
+
+    @foreach (var blog in Model.Blogs)
+    {
+        <div class="card m-1">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-11">
+                        @blog.name
+                    </div>
+                    <div class="col-1">
+                        <a asp-page="./ReviewBlogDetail" asp-route-blogId="@blog.blogId">View</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="flex-column">
+                    @blog.CreatedDate
+                    @blog.type.type
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
+
+
+
+<a class="btn btn-primary" asp-page="./Admin">Return to Admin Page</a>

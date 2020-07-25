@@ -1,0 +1,112 @@
+﻿@page
+@model IT420.Areas.Identity.Pages.Account.ListUsersModel
+@{
+}
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
+<a class="btn btn-primary m-1" asp-page="../admin/admin">Return to Admin Page</a>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>
+            Username
+        </th>
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            Admin
+        </th>
+        <th>
+            Expert
+        </th>
+        <th>
+            Banned
+        </th>
+        <th>
+            Manage
+        </th>
+    </tr>
+    @foreach (var user in Model.Users)
+    {
+        string color = "white";
+        if (user.IsAdmin == true) color = "yellow";
+        if (user.IsBanned == true) color = "red";
+        if (user.IsExpert == true) color = "green";
+
+        <tr bgcolor="@color">
+        <td>
+            @user.UserName
+        </td>
+        <td>
+            @user.firstName
+        </td>
+        <td>
+            @user.lastName
+        </td>
+        <td>
+            @user.IsAdmin
+        </td>
+        <td>
+            @user.IsExpert
+        </td>
+        <td>
+            @user.IsBanned
+        </td>
+        @if (user.UserName == User.Identity.Name)
+        {
+            <td></td>
+        }
+        else
+        {
+            <td>
+                <div class="d-flex flex-column justify-content-between">
+                    <a asp-page="./EditUser" asp-route-userId="@user.Id">Edit User</a>
+                    @if (user.IsAdmin == false)
+                    {
+                        <a asp-page="./MakeAdmin" asp-route-userId="@user.Id">Make Admin</a>
+                    }
+                    else
+                    {
+                        <a asp-page="./RemoveAdmin" asp-route-userId="@user.Id">Remove Admin</a>
+                    }
+                    @if (user.IsExpert == false)
+                    {
+                        <a asp-page="./MakeExpert" asp-route-userId="@user.Id">Make Expert</a>
+                    }
+                    else
+                    {
+                        <a asp-page="./RemoveExpert" asp-route-userId="@user.Id">Remove Expert</a>
+                    }
+                    @if (user.IsBanned == false)
+                    {
+                        <a asp-page="./BanUser" asp-route-userId="@user.Id">Ban User</a>
+                    }
+                    else
+                    {
+                        <a asp-page="./RestoreUser" asp-route-userId="@user.Id">Restore User</a>
+                    }
+                </div>
+            </td>
+        }
+
+    </tr>
+    }
+</table>
+
+<a class="btn btn-primary m-1" asp-page="../admin/admin">Return to Admin Page</a>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        setTimeout(function () { $('.alert-info').fadeOut(); }, 5000);
+    </script>
+
+}

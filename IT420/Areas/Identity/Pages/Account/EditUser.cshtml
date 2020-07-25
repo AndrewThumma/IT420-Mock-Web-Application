@@ -1,0 +1,41 @@
+﻿@page "{userId}"
+@model IT420.Areas.Identity.Pages.Account.EditUserModel
+@{
+}
+
+<h2>Update User</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="@Model.userProfile.Id" />
+    <div class="form-group">
+        <label asp-for="@Model.userProfile.firstName"></label>
+        <input asp-for="@Model.userProfile.firstName" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.userProfile.firstName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.userProfile.lastName"></label>
+        <input asp-for="@Model.userProfile.lastName" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.userProfile.lastName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.userProfile.IsAdmin"></label>
+        <input asp-for="@Model.userProfile.IsAdmin" />
+        <span class="text-danger" asp-validation-for="@Model.userProfile.IsAdmin"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.userProfile.IsExpert"></label>
+        <input asp-for="@Model.userProfile.IsExpert" />
+        <span class="text-danger" asp-validation-for="@Model.userProfile.IsExpert"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.userProfile.IsBanned"></label>
+        <input asp-for="@Model.userProfile.IsBanned" />
+        <span class="text-danger" asp-validation-for="@Model.userProfile.IsBanned"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-primary" asp-page="./ListUsers">Cancel</a>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

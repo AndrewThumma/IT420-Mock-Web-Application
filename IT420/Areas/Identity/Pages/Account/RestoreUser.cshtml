@@ -1,0 +1,10 @@
+﻿@page "{userId}"
+@model IT420.Areas.Identity.Pages.Account.RestoreUserModel
+@{
+}
+
+<div class="text-danger">Are you sure you wish to restore @Model.userProfile.UserName?</div>
+<form method="post">
+    <button type="submit" class="btn btn-danger">Restore</button>
+    <a class="btn btn-primary" asp-page="./ListUsers">Cancel</a>
+</form>

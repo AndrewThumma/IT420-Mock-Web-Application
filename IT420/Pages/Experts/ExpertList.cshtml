@@ -1,0 +1,39 @@
+﻿@page
+@model IT420.Pages.Experts.ExpertListModel
+@{
+}
+
+<h2>Meet Our Panel Experts</h2>
+
+@foreach (var expert in Model.Experts)
+{
+    string imageBase64Data = Convert.ToBase64String(expert.image);
+    string userImgURL = string.Format("data:image/jpg;base64, {0}", imageBase64Data);
+
+    <div class="card m-1">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-1">
+                    @if (userImgURL.Contains("AA=="))
+                    {
+                        <img src="~/images/UserImages/new.jpg" width="55" height="55" />
+                    }
+                    else
+                    {
+                        <img src="@userImgURL" width="55" height="55" />
+                    }
+                </div>
+                <div class="col-11">
+                    <h3>@expert.firstName @expert.lastName</h3>
+                    <h5>@expert.specialty</h5>
+                    <div class="card-text">
+                        @expert.bio
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+}

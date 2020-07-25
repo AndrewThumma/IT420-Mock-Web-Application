@@ -1,0 +1,34 @@
+﻿@page "{blogId:int}"
+@model IT420.Pages.Admin.ReviewBlogDetailModel
+@{
+}
+
+<div class="card m-1">
+    <div class="card-header">
+        <div class="card-img-top">
+            <img src="~/images/BlogImages/@Model.Blog.blogImageURL" />
+        </div>        
+        <div class="card-title">
+            <h2>@Model.Blog.name</h2>
+        </div>
+        <div class="card-text">
+            by: @Model.userProfile.firstName @Model.userProfile.lastName
+        </div>
+        <div class="card-text">
+            Created: @Model.Blog.CreatedDate
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="card-text">
+            @Model.Blog.body
+        </div>
+
+    </div>
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-primary">Approve</button>
+    <a class="btn btn-danger" asp-page="../Blogs/DeleteBlog" asp-route-blogId="@Model.Blog.blogId">Delete Blog</a>
+    <a class="btn btn-primary" asp-page="./ReviewBlogs">Return to blog list</a>
+</form>

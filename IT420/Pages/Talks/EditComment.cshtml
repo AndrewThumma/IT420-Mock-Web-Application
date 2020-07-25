@@ -1,0 +1,20 @@
+﻿@page "{SelectedCommentId:int}"
+@model IT420.Pages.Talks.EditCommentModel
+@{
+    ViewData["Title"] = "EditComment";
+}
+
+    <form method="post">
+        <input type="hidden" asp-for="Comment.TalkId" />
+        <input type="hidden" asp-for="Comment.CommentID" />
+        <input type="hidden" asp-for="Comment.userId" />
+        <div class="form-group">
+            <input asp-for="Comment.Comment" />
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-primary" asp-page="./Detail" asp-route-SelectedTalkId="@Model.Comment.TalkId">Cancel</a>
+    </form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
